@@ -14,7 +14,23 @@ window.onload = function () {
             document.querySelector('#genre').value = play.genre;
             document.querySelector('#duration').value = play.duration;
             document.querySelector('#poster').value = play.poster;
-            document.querySelector('#theatre_id').value = play.theatre_id;
+
+            // Fetch all theatres
+            fetch(`http://localhost:3000/theatres`)
+                .then(response => response.json())
+                .then(theatres => {
+                    // Populate the theatre dropdown with the fetched theatre names
+                    const theatreDropdown = document.querySelector('#theatre');
+                    theatres.forEach(theatre => {
+                        const option = document.createElement('option');
+                        option.value = theatre.id;
+                        option.text = theatre.name;
+                        theatreDropdown.appendChild(option);
+                    });
+
+                    // Set the selected option to the play's current theatre
+                    theatreDropdown.value = play.theatre_id;
+                });
         });
 
     // Handle form submission
@@ -34,7 +50,7 @@ window.onload = function () {
                 genre: document.querySelector('#genre').value,
                 duration: document.querySelector('#duration').value,
                 poster: document.querySelector('#poster').value,
-                theatre_id: document.querySelector('#theatre_id').value,
+                theatre_id: document.querySelector('#theatre').value,
             }),
         })
             .then(response => response.json())

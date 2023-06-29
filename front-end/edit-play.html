@@ -23,36 +23,59 @@
     </header>
 
     <section id="intro">
-        <h2>Looking for a show tonight? Let's find you one!</h2>
-        <p>Check out all the big shows on in London right now — all in one place, right here. Hover over a poster for all the details.</p>
+        <center><h2>Update the details of a show</h2></center>
     </section>
     <main>
-        <form id="edit-play-form">
-            <label for="name">Name</label>
-            <input id="name" type="text">
-            
-            <label for="description">Description</label>
-            <textarea id="description"></textarea>
-        
-            <label for="end_date">End Date</label>
-            <input id="end_date" type="date">
-            
-            <label for="genre">Genre</label>
-            <input id="genre" type="text">
-        
-            <label for="duration">Duration</label>
-            <input id="duration" type="text">
-        
-            <label for="poster">Poster URL</label>
-            <input id="poster" type="text">
-        
-            <label for="theatre_id">Theatre ID</label>
-            <input id="theatre_id" type="number">
-        
-            <button type="submit">Submit</button>
+        <form id="edit-play-form" class="form-styled">
+    
+            <div class="form-group form-group-row">
+                <div class="form-group-inner">
+                    <label for="name">Name</label>
+                    <input id="name" type="text">
+                </div>
+    
+                <div class="form-group-inner">
+                    <label for="theatre">Theatre</label>
+                    <select id="theatre">
+                        <!-- Theatre options will be here -->
+                    </select>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description"></textarea>
+            </div>
+    
+            <div class="form-group form-group-row">
+                <div class="form-group-inner">
+                    <label for="end_date">End Date</label>
+                    <input id="end_date" type="text">
+                </div>
+    
+                <div class="form-group-inner">
+                    <label for="genre">Genre</label>
+                    <input id="genre" type="text">
+                </div>
+    
+                <div class="form-group-inner">
+                    <label for="duration">Duration</label>
+                    <input id="duration" type="text">
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="poster">Poster URL</label>
+                <input id="poster" type="text">
+            </div>
+    
+            <div class="form-group-button">
+                <button type="submit">Submit</button>
+            </div>
+    
         </form>
-        
     </main>
+    
     <footer>
         <p>&copy; 2023 A Play Today</p>
     </footer>
