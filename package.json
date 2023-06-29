@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -L index.js",
-    "start": "node index.js",
+    "dev": "nodemon -L ./server/index.js",
+    "start": "node ./server/index.js",
     "setup-db": "node ./server/database/setup-db.js"
   },
   "keywords": [],
