@@ -34,6 +34,21 @@ class PlayController {
             res.status(500).json({Error: `Error - ${err}`})
         }
     }
+
+    static async updatePlay(req, res) {
+        const { id } = req.params
+        const newPlay = req.body
+        try{
+            const play = await Play.updatePlay(newPlay, id)
+            if (play){
+                res.status(200).json(play)
+            } else {
+                res.status(404).json({error: `Play not found!`})
+            }
+        }catch (err) {
+            res.status(500).json({error:`Oops! Something went wrong - ${err}`})
+        }
+    }
 }
 
 

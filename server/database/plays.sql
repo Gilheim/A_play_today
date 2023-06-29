@@ -1,7 +1,7 @@
 
-
-DROP TABLE IF EXISTS theatres;
 DROP TABLE IF EXISTS shows;
+DROP TABLE IF EXISTS theatres;
+
 
 CREATE TABLE theatres (
     theatre_id INT GENERATED ALWAYS AS IDENTITY,
