@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- FAVICON -->
     <link rel="stylesheet" href="./assets/styles.css">
-    <script src="./assets/editshows.js"></script>
+    <script src="./assets/edit-play.js"></script>
     <title>A Play Today</title>
 </head>
 <body>
@@ -27,8 +27,31 @@
         <p>Check out all the big shows on in London right now — all in one place, right here. Hover over a poster for all the details.</p>
     </section>
     <main>
-        <section id="showcase">
-        </section>
+        <form id="edit-play-form">
+            <label for="name">Name</label>
+            <input id="name" type="text">
+            
+            <label for="description">Description</label>
+            <textarea id="description"></textarea>
+        
+            <label for="end_date">End Date</label>
+            <input id="end_date" type="date">
+            
+            <label for="genre">Genre</label>
+            <input id="genre" type="text">
+        
+            <label for="duration">Duration</label>
+            <input id="duration" type="text">
+        
+            <label for="poster">Poster URL</label>
+            <input id="poster" type="text">
+        
+            <label for="theatre_id">Theatre ID</label>
+            <input id="theatre_id" type="number">
+        
+            <button type="submit">Submit</button>
+        </form>
+        
     </main>
     <footer>
         <p>&copy; 2023 A Play Today</p>

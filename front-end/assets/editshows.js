@@ -1,110 +1,73 @@
-function createShowElement(data) {
-    const show = document.createElement("div");
-    show.className = "show";
+window.onload = function () {
+    // Fetch both theatres and plays data
+    Promise.all([
+        fetch("http://localhost:3000/theatres"),
+        fetch("http://localhost:3000/plays"),
+    ])
+        .then(([theatresRes, playsRes]) => Promise.all([theatresRes.json(), playsRes.json()]))
+        .then(([theatres, plays]) => {
+            // Create a map of theatre_ids to theatre_names
+            const theatreMap = theatres.reduce((map, theatre) => {
+                map[theatre.id] = theatre.name;
+                return map;
+            }, {});
 
-    const header = document.createElement("h2");
-    header.textContent = data["name"];
-    show.appendChild(header);
+            const showcase = document.querySelector("#showcase");
 
-    const content = document.createElement("p");
-    content.textContent = data["description"];
-    show.appendChild(content);
+            for (let play of plays) {
+                let flipCard = document.createElement("div");
+                flipCard.classList.add("flip-card");
 
-    const editButton = document.createElement("button");
-    editButton.textContent = "Edit";
-    editButton.addEventListener("click", () => {
-        const form = document.createElement("form");
-        const textarea = document.createElement("textarea");
-        textarea.textContent = data["show_description"];
-        form.appendChild(textarea);
+                let flipCardInner = document.createElement("div");
+                flipCardInner.classList.add("flip-card-inner");
 
-        const submitButton = document.createElement("button");
-        submitButton.textContent = "Submit";
-        form.appendChild(submitButton);
+                let flipCardFront = document.createElement("div");
+                flipCardFront.classList.add("flip-card-front");
+                let img = document.createElement("img");
+                img.src = play.poster;
+                flipCardFront.appendChild(img);
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const newContent = textarea.value;
-            const options = {
-                method: "PUT",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    show_description: newContent
-                })
-            };
-            const response = await fetch(`http://localhost:3000/plays/${data.show_id}`, options);
-            if (response.status == 200) {
-                window.location.reload();
+                let flipCardBack = document.createElement("div");
+                flipCardBack.classList.add("flip-card-back");
+
+                let h2 = document.createElement("h2");
+                h2.textContent = play.name;
+                flipCardBack.appendChild(h2);
+
+                let p1 = document.createElement("p");
+                p1.classList.add("showing-at");
+                // Use the theatreMap to display theatre_name instead of theatre_id
+                p1.textContent = `${theatreMap[play.theatre_id]}`; 
+                flipCardBack.appendChild(p1);
+
+                let p2 = document.createElement("p");
+                p2.classList.add("duration");
+                p2.textContent = `Runtime: ${play.duration}`;
+                flipCardBack.appendChild(p2);
+
+                let p3 = document.createElement("p");
+                p3.classList.add("on-until");
+                p3.textContent = `On until: ${play.end_date}`;
+                flipCardBack.appendChild(p3);
+
+                let p4 = document.createElement("p");
+                p4.textContent = play.description;
+                flipCardBack.appendChild(p4);
+
+                let btn = document.createElement("button");
+                btn.textContent = "Edit";
+                btn.classList.add("edit-btn");
+                btn.addEventListener("click", function () {
+                    window.location.href = `http://127.0.0.1:5500/front-end/edit-play.html?playId=${play.id}`;
+                });                
+                flipCardBack.appendChild(btn);
+
+                flipCardInner.appendChild(flipCardFront);
+                flipCardInner.appendChild(flipCardBack);
+
+                flipCard.appendChild(flipCardInner);
+
+                showcase.appendChild(flipCard);
             }
         });
-
-        show.replaceChild(form, content);
-    });
-    show.appendChild(editButton);
-
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", async () => {
-        const options = {
-            method: "DELETE",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        };
-        const response = await fetch(`http://localhost:3000/plays/${data.show_id}`, options);
-        if (response.status == 204) {
-            show.remove();
-        }
-    });
-    show.appendChild(deleteButton);
-
-    return show;
 }
-
-document.getElementById("create-show").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const form = new FormData(e.target);
-
-    const options = {
-        method: "POST",
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            show_name: form.get("show_name"),
-            show_description: form.get("show_description")
-            // Add more form fields as required by the show creation
-        })
-    };
-
-    const result = await fetch("http://localhost:3000/plays", options);
-
-    if (result.status == 201) {
-        window.location.reload();
-    }
-})
-
-async function loadShows() {
-    const response = await fetch("http://localhost:3000/plays");
-
-    if (response.status == 200) {
-        const shows = await response.json();
-
-        const container = document.getElementById("shows");
-
-        shows.forEach(s => {
-            const elem = createShowElement(s);
-            container.appendChild(elem);
-        });
-    } else {
-        window.location.assign("./editshows.html");
-    }
-}
-
-loadShows();
