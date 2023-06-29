@@ -54,8 +54,8 @@ class PlayController {
         try {
             const id = parseInt(req.params.id);
             const play = await Play.getOneById(id);
-            const result = await Play.deletePlay(play);
-            res.json(result);
+            const result = await play.deletePlay();
+            res.status(204).json(result);
         } catch (err) {
             res.status(404).json({"error": err.message})
         }
