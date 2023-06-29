@@ -29,7 +29,12 @@ class Play {
     }
 
     static async createPlay(play){
-        const { name, description, price, end_date, genre, duration, poster, theatre_id } = play
+        const { name, description, price, end_date, genre, duration, poster, theatre_name } = play
+        console.log(theatre_name)
+        const getTheatreId = await db.query('SELECT theatre_id FROM theatres WHERE theatre_name ILIKE $1;', [theatre_name])
+        const theatre_id = getTheatreId.rows[0].theatre_id
+        console.log(theatre_id)
+        
         const query = 'INSERT INTO shows (show_name, show_description, ticket_price_£, end_date, genre, show_duration, poster_url, theatre_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;'
         const values = [name, description, price, end_date, genre, duration, poster, theatre_id]
         const { rows } = await db.query(query,values)
