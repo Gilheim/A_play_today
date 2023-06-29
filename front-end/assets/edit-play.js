@@ -50,7 +50,6 @@ window.onload = function () {
                 genre: document.querySelector('#genre').value,
                 duration: document.querySelector('#duration').value,
                 poster: document.querySelector('#poster').value,
-                theatre_id: document.querySelector('#theatre').value,
             }),
         })
             .then(response => response.json())
