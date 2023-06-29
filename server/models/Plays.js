@@ -15,9 +15,17 @@ class Play {
     static async getAll(){
         const response = await db.query("SELECT * FROM shows ORDER BY show_name;")
         if (response.rows.length === 0) {
-            throw new Error("No shows available.")
+            throw new Error("No plays available.")
         }
         return response.rows.map(g => new Play(g));
+    }
+
+    static async getOneById(id){
+        const response = await db.query("SELECT * FROM shows WHERE show_id = $1", [id]);
+        if (response.rows.length != 1) {
+            throw new Error("Unable to locate play.")
+        }
+        return new Play(response.rows[0]);
     }
 }
 
