@@ -14,6 +14,14 @@ class Theatre {
         }
         return response.rows.map(g => new Theatre(g));
     }
+
+    static async getOneById(id){
+        const response = await db.query("SELECT * FROM theatres WHERE theatre_id = $1", [id]);
+        if (response.rows.length != 1) {
+            throw new Error("Unable to locate theatre.")
+        }
+        return new Theatre(response.rows[0]);
+    }
 }
 
 
