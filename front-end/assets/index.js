@@ -1,7 +1,17 @@
 window.onload = function () {
-    fetch("http://localhost:3000/plays")
-        .then(response => response.json())
-        .then(plays => {
+    // Fetch both theatres and plays data
+    Promise.all([
+        fetch("http://localhost:3000/theatres"),
+        fetch("http://localhost:3000/plays"),
+    ])
+        .then(([theatresRes, playsRes]) => Promise.all([theatresRes.json(), playsRes.json()]))
+        .then(([theatres, plays]) => {
+            // Create a map of theatre_ids to theatre_names
+            const theatreMap = theatres.reduce((map, theatre) => {
+                map[theatre.id] = theatre.name;
+                return map;
+            }, {});
+
             const showcase = document.querySelector("#showcase");
 
             for (let play of plays) {
@@ -26,7 +36,8 @@ window.onload = function () {
 
                 let p1 = document.createElement("p");
                 p1.classList.add("showing-at");
-                p1.textContent = `Theatre ID: ${play.theatre_id}`; // replace with theatre name if available
+                // Use the theatreMap to display theatre_name instead of theatre_id
+                p1.textContent = `${theatreMap[play.theatre_id]}`; 
                 flipCardBack.appendChild(p1);
 
                 let p2 = document.createElement("p");
