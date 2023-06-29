@@ -49,6 +49,17 @@ class TheatreController {
             res.status(500).json({error:`Oops! Something went wrong - ${err}`})
         }
     }
+
+    static async deleteTheatre(req, res) {
+        try {
+            const id = parseInt(req.params.id);
+            const theatre = await Theatre.getOneById(id);
+            const result = await Theatre.deleteTheatre(theatre);
+            res.json(result);
+        } catch (err) {
+            res.status(404).json({"error": err.message})
+        }
+    }
 }
 
 
