@@ -37,9 +37,12 @@ class PlayController {
 
     static async updatePlay(req, res) {
         const { id } = req.params
+        console.log(`ID is`, id)
         const newPlay = req.body
+        console.log(`newPlay is`, id)
         try{
             const play = await Play.updatePlay(newPlay, id)
+            console.log(`play is`, id)
             if (play){
                 res.status(200).json(play)
             } else {

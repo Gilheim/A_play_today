@@ -14,6 +14,7 @@ window.onload = function () {
             document.querySelector('#genre').value = play.genre;
             document.querySelector('#duration').value = play.duration;
             document.querySelector('#poster').value = play.poster;
+            document.querySelector('#price').value = play.price;
 
             // Fetch all theatres
             fetch(`http://localhost:3000/theatres`)
@@ -50,12 +51,14 @@ window.onload = function () {
                 genre: document.querySelector('#genre').value,
                 duration: document.querySelector('#duration').value,
                 poster: document.querySelector('#poster').value,
+                price: document.querySelector('#price').value,
+                theatre_name: document.querySelector('#theatre option:checked').text,
             }),
         })
             .then(response => response.json())
             .then(data => {
                 // Redirect user back to the main page after the play has been updated
-                window.location.href = `http://localhost:3000`;
+                window.location.href = `http://127.0.0.1:5500/front-end/editshows.html`;
             })
             .catch((error) => {
                 console.error('Error:', error);

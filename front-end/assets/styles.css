@@ -192,8 +192,12 @@ footer {
 }
 
 #end_date, #genre, #duration {
-    width: 172px;
+    width: 142px;
     margin-right: 10px;
+}
+
+#price {
+    width: 30px;
 }
 
 #poster {
