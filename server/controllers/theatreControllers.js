@@ -1,9 +1,9 @@
-const Play = require("../models/Plays")
+const Theatre = require("../models/Theatres")
 
-class PlayController {
-    static async getAllPlays(req,res) {
+class TheatreController {
+    static async getAllTheatres(req,res) {
         try{
-            const data = await Play.getAll()
+            const data = await Theatre.getAll()
             res.status(200).json(data)
         } catch (err){
             console.log(err)
@@ -13,4 +13,4 @@ class PlayController {
 }
 
 
-module.exports = PlayController
+module.exports = TheatreController
