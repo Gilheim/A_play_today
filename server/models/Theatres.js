@@ -1,7 +1,8 @@
 const db = require("../database/db")
 
 class Theatre {
-    constructor({theatre_name, location, capacity}) {
+    constructor({theatre_id, theatre_name, location, capacity}) {
+        this.id = theatre_id
         this.name = theatre_name
         this.location = location
         this.capacity = capacity
