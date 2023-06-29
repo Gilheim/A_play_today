@@ -49,6 +49,17 @@ class PlayController {
             res.status(500).json({error:`Oops! Something went wrong - ${err}`})
         }
     }
+
+    static async deletePlay(req, res) {
+        try {
+            const id = parseInt(req.params.id);
+            const play = await Play.getOneById(id);
+            const result = await Play.deletePlay(play);
+            res.json(result);
+        } catch (err) {
+            res.status(404).json({"error": err.message})
+        }
+    }
 }
 
 
