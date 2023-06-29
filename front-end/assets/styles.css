@@ -1,22 +1,112 @@
-body {
-    font-family: Arial, sans-serif;
-    max-width: 1500px;
-    margin: auto;
-    background-color: #1c1c1c;
-    color: #f6f6f6;
+@font-face {
+    font-family: "Nocturno Display";
+    src: url("https://type.persona.co/NocturnoDisplay/acd5fd26-3266-47be-b47b-2b1089501373-3.woff") format("woff");
+    font-style: normal;
+    font-weight: normal;
+    unicode-range: U+0000-DFFF, U+F900-FFFD;
+  }
+  @font-face {
+    font-family: "Nocturno Display";
+    src: url("https://type.persona.co/NocturnoDisplay/cb45dd4c-9a52-4296-a7ac-736cd8826816-3.woff") format("woff");
+    font-style: italic;
+    font-weight: normal;
+    unicode-range: U+0000-DFFF, U+F900-FFFD;
+  }
+  @font-face {
+    font-family: "Nocturno Display";
+    src: url("https://type.persona.co/NocturnoDisplay/f3a4061c-c833-46cf-ae3e-6000c8633f16-3.woff") format("woff");
+    font-style: normal;
+    font-weight: bold;
+    unicode-range: U+0000-DFFF, U+F900-FFFD;
+  }
+  @font-face {
+    font-family: "Nocturno Display";
+    src: url("https://type.persona.co/NocturnoDisplay/5943c4cb-b6d2-4995-8ec1-bb1f20f6e01d-3.woff") format("woff");
+    font-style: italic;
+    font-weight: bold;
+    unicode-range: U+0000-DFFF, U+F900-FFFD;
+  }
+
+
+  @font-face {
+    font-family: "Marat Sans";
+    src: url("https://type.persona.co/MaratSans/b56fe788-c31c-411d-bf2e-4417394938e4-3.woff") format("woff");
+    font-style: normal;
+    font-weight: normal;
+    unicode-range: U+0000-DFFF, U+F900-FFFD;
+}
+@font-face {
+    font-family: "Marat Sans";
+    src: url("https://type.persona.co/MaratSans/58bb92d5-2af2-4db1-a05a-c8d927455beb-3.woff") format("woff");
+    font-style: italic;
+    font-weight: normal;
+    unicode-range: U+0000-DFFF, U+F900-FFFD;
+}
+@font-face {
+    font-family: "Marat Sans";
+    src: url("https://type.persona.co/MaratSans/00cfb6b8-aa2d-46aa-a5c6-88c5e6d8bece-3.woff") format("woff");
+    font-style: normal;
+    font-weight: bold;
+    unicode-range: U+0000-DFFF, U+F900-FFFD;
+}
+@font-face {
+    font-family: "Marat Sans";
+    src: url("https://type.persona.co/MaratSans/d245e519-e32b-47d2-95db-68adf0f567fd-3.woff") format("woff");
+    font-style: italic;
+    font-weight: bold;
+    unicode-range: U+0000-DFFF, U+F900-FFFD;
 }
 
+:root {
+    --primary-color: #302A18;
+    --secondary-color: #fde4c3;
+    --gradient: linear-gradient(135deg, #302A18, #fde4c3);
+}
+
+body {
+    font-family: 'Marat Sans',Helvetica,Arial,sans-serif;
+    max-width: 1500px;
+    margin: auto;
+    background: #302A18;
+    color: #f6f6f6;
+    animation: bodyFadeIn 2s forwards;
+    font-size: 20px;
+}
+
+
 header {
-    background-color: #302A18;
+    margin-top: -20px;
     padding: 20px;
+    transition: background 0.3s ease;
+    box-shadow: 0 1px 0 0 var(--secondary-color);
 }
 
 header h1 {
+    font-family: 'Nocturno Display',Helvetica,Arial,sans-serif;
+    font-size: 44px;
+    font-weight: 700;
     display: inline-block;
-    color: #fde4c3;
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+    margin-left: 30px;
 }
 
+header h1 a {
+    display: inline-block;
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+header h1 a:hover {
+    display: inline-block;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+
 nav {
+    font-size: 22px;
+    margin-top: 30px;
     float: right;
 }
 
@@ -27,15 +117,22 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #fde4c3;
+    color: var(--secondary-color);
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ffffff;
 }
 
 footer {
-    background-color: #302A18;
+    background: #675a3543;
     text-align: center;
-    padding: 20px;
-    margin-top: 20px;
-    color: #fde4c3;
+    padding: 1px;
+    margin-top: 10px;
+    color: #fcf4f4c4;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
 }
 
 #showcase {
@@ -96,24 +193,28 @@ footer {
 }
 
 #intro {
-    margin-left: 20px;
-    margin-top: 20px;
+    margin-left: 50px;
+    margin-bottom: 120px;
+    margin-top: 50px;
 }
 
 #intro h2 {
-    font-size: 32px;
+    font-family: 'Nocturno Display',Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 36px;
     color: #f6f6f6;
 }
 
 #intro p {
-    font-size: 20px;
-    color: #f6f6f6;
+    font-family: 'Marat Sans',Helvetica,Arial,sans-serif;
+    font-size: 22px;
+    color: #ffffff;
     margin-bottom: 20px;
 }
 
 
 .form-styled {
-    background-color: #2b2b2b;
+    background-color: #675a35;
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
@@ -220,3 +321,29 @@ footer {
     width: 580px;
 }
 
+#show_bg {
+    position: relative;
+    width: 100%;
+    min-height: 800px; /* Set a minimum height */
+}
+
+#show_bg:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.52), #302A18),
+        url('https://assets.playbill.com/editorial/(L-R)%20Jasmine%20Beel,%20Vivian%20Panka,%20Erin%20Caldwell,%20Maddison%20Firth%20-%20Heathers%20-%20The%20Other%20Palace%20-%20Autumn%202022%20-%20Photo%20Credit%20Pamela%20Raith.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+#content {
+    padding: 20px;
+    color: white;
+    position: relative;
+}
