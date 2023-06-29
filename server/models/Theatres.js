@@ -31,6 +31,15 @@ class Theatre {
         const { rows } = await db.query(query, values)
         return rows[0]
     }
+
+    static async updateTheatre(theatre, id) {
+        const { name, location, capacity } = theatre
+        const query = 'UPDATE theatres SET theatre_name = $1, location = $2, capacity = $3 WHERE theatre_id = $4 RETURNING *;' 
+        const values = [name, location, capacity, id]
+        const { rows } = await db.query(query, values)
+        return rows [0]
+
+    }
 }
 
 

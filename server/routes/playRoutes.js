@@ -6,6 +6,7 @@ const router = express.Router()
 router.get('/', PlayController.getAllPlays)
 router.get('/:id', PlayController.getOneById)
 router.post('/', PlayController.createPlay)
+router.put('/:id', PlayController.updatePlay)
 
 
 
