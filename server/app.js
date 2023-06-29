@@ -3,6 +3,7 @@ const cors = require('cors');
 
 const logRoutes = require('./middleware/logger');
 const theatreRoutes = require('./routes/theatreRoutes')
+const playRoutes = require('./routes/playRoutes')
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get('/', (req,res) => {
 
 app.use(logRoutes);
 app.use('/theatres', theatreRoutes)
+app.use('/plays', playRoutes)
 
 
 
