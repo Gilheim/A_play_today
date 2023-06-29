@@ -24,6 +24,16 @@ class TheatreController {
             res.status(500).json({error:`Oops! Something went wrong - ${err}`})
         }
     }
+
+    static async createTheatre(req,res) {
+        const theatre = req.body
+        try {
+            const newTheatre = await Theatre.createTheatre(theatre)
+            res.status(201).json(newTheatre)
+        } catch (err){
+            res.status(500).json({Error: `Error - ${err}`})
+        }
+    }
 }
 
 

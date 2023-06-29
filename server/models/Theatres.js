@@ -22,6 +22,14 @@ class Theatre {
         }
         return new Theatre(response.rows[0]);
     }
+
+    static async createTheatre(theatre) {
+        const { name, location, capacity } = theatre
+        const query = 'INSERT INTO theatres (theatre_name, location, capacity) VALUES ($1, $2, $3) RETURNING *;'
+        const values = [name, location, capacity]
+        const { rows } = await db.query(query, values)
+        return rows[0]
+    }
 }
 
 

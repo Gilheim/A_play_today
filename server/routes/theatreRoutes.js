@@ -5,6 +5,7 @@ const router = express.Router()
 
 router.get('/', TheatreController.getAllTheatres)
 router.get('/:id', TheatreController.getOneById)
+router.post('/', TheatreController.createTheatre)
 
 
 
