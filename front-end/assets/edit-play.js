@@ -64,4 +64,22 @@ window.onload = function () {
                 console.error('Error:', error);
             });
     });
+
+    // Handle delete play button click
+    document.querySelector('#delete-play-button').addEventListener('click', function () {
+        // Ask for confirmation before deleting
+        if (window.confirm("Are you sure you want to delete this play?")) {
+            // If confirmed, send DELETE request
+            fetch(`http://localhost:3000/plays/${playId}`, {
+                method: 'DELETE'
+            })
+            .then(() => {
+                // Redirect user back to the main page after the play has been deleted
+                window.location.href = `http://127.0.0.1:5500/front-end/editshows.html`;
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    });
 };
