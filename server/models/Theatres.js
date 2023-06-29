@@ -1,4 +1,5 @@
 const db = require("../database/db")
+const Play = require("./Plays")
 
 class Theatre {
     constructor({theatre_id, theatre_name, location, capacity}) {
@@ -39,6 +40,15 @@ class Theatre {
         const { rows } = await db.query(query, values)
         return rows [0]
 
+    }
+
+    static async deleteTheatre(theatre) {
+        const deletePlays = await db.query('DELETE FROM shows WHERE theatre_id = $1 RETURNING *;', [theatre.id])
+        const response = await db.query('DELETE FROM theatres WHERE theatre_id = $1 RETURNING *;', [theatre.id])
+        if (response.rows.length != 1) {
+            throw new Error("Unable to delete theatre.")
+        }
+        return [new Theatre(response.rows[0]), deletePlays.rows.map(r => new Play(r))];
     }
 }
 

@@ -7,6 +7,7 @@ router.get('/', TheatreController.getAllTheatres)
 router.get('/:id', TheatreController.getOneById)
 router.post('/', TheatreController.createTheatre)
 router.put('/:id', TheatreController.updateTheatre)
+router.delete('/:id', TheatreController.deleteTheatre)
 
 
 
