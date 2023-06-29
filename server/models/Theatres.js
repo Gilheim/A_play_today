@@ -42,9 +42,9 @@ class Theatre {
 
     }
 
-    static async deleteTheatre(theatre) {
-        const deletePlays = await db.query('DELETE FROM shows WHERE theatre_id = $1 RETURNING *;', [theatre.id])
-        const response = await db.query('DELETE FROM theatres WHERE theatre_id = $1 RETURNING *;', [theatre.id])
+    async deleteTheatre() {
+        const deletePlays = await db.query('DELETE FROM shows WHERE theatre_id = $1 RETURNING *;', [this.id])
+        const response = await db.query('DELETE FROM theatres WHERE theatre_id = $1 RETURNING *;', [this.id])
         if (response.rows.length != 1) {
             throw new Error("Unable to delete theatre.")
         }

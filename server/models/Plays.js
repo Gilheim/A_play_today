@@ -49,8 +49,8 @@ class Play {
         return rows[0]
     }
 
-    static async deletePlay(play) {
-        const response = await db.query('DELETE FROM shows WHERE show_id = $1 RETURNING *;', [play.id])
+    async deletePlay() {
+        const response = await db.query('DELETE FROM shows WHERE show_id = $1 RETURNING *;', [this.id])
         if (response.rows.length != 1) {
             throw new Error("Unable to delete play.")
         }
